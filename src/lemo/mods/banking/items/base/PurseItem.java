@@ -2,6 +2,8 @@ package lemo.mods.banking.items.base;
 
 import java.util.List;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -14,16 +16,32 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import lemo.mods.banking.Banking;
+import lemo.mods.banking.BankingTab;
+import lemo.mods.banking.IDGenerator;
 
 public class PurseItem extends Item {
 
+	public static final Item item = new PurseItem(IDGenerator.getID());
+
+	public static void load() {
+
+		GameRegistry.registerItem(PurseItem.item, Banking.modid + ":"
+				+ PurseItem.item.getUnlocalizedName());
+		LanguageRegistry.addName(PurseItem.item, "Purse");
+		GameRegistry.addShapedRecipe(new ItemStack(PurseItem.item), "LLL",
+				"SDS", "LLL", 'L', Item.leather, 'S', Item.silk, 'D',
+				Item.diamond);
+	}
+
+	// constants
 	public static int divisor = 100;
 
 	public PurseItem(int id) {
 		super(id);
 		setMaxStackSize(1);
 		setUnlocalizedName("purse");
-		setCreativeTab(CreativeTabs.tabMisc);
+
+		setCreativeTab(BankingTab.instance());
 	}
 
 	@Override

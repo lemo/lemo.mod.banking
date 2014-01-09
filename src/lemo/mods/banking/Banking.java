@@ -5,8 +5,10 @@ import com.jcraft.jorbis.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.GameRules;
 import lemo.mods.banking.items.base.CoinItem;
 import lemo.mods.banking.items.base.PurseItem;
+import lemo.mods.banking.items.machine.SellBuyMachineBlock;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler; // used in 1.6.2
 import cpw.mods.fml.common.Mod.Instance;
@@ -35,22 +37,8 @@ public class Banking {
 	/** This is used to keep track of GUIs that we make */
 	private static int modGuiIndex = 0;
 
-	/** This is the starting index for all of our mod's item IDs */
-	private static int modItemIndex = 7000;
-
 	/** Set our custom inventory Gui index to the next available Gui index */
 	public static final int ItemInventoryGuiIndex = modGuiIndex++;
-
-	public static final PurseItem item_purse = new PurseItem(modItemIndex++);
-	public static final CoinItem item_coin = new CoinItem(modItemIndex++);
-
-	public static final ItemStack item_stack_purse = new ItemStack(item_purse);
-
-	public static CreativeTabs bankingtab = new CreativeTabs("tabBanking") {
-		public ItemStack getIconItemStack() {
-			return new ItemStack(item_purse, 1, 0);
-		}
-	};
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -62,14 +50,9 @@ public class Banking {
 		proxy.registerRenderers();
 		NetworkRegistry.instance().registerGuiHandler(this, new CommonProxy());
 
-		LanguageRegistry.addName(item_purse, "Purse");
-		LanguageRegistry.addName(item_coin, "Coin");
-		
-		GameRegistry.registerItem(item_purse, "purse");
-		GameRegistry.registerItem(item_coin, "coin");
-		
-		GameRegistry.addShapedRecipe(item_stack_purse, "LLL", "SDS", "LLL",
-				'L', Item.leather, 'S', Item.silk, 'D', Item.diamond);
+		CoinItem.load();
+		PurseItem.load();
+		SellBuyMachineBlock.load();
 	}
 
 	@EventHandler

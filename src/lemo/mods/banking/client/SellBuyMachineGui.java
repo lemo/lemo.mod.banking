@@ -1,21 +1,29 @@
 package lemo.mods.banking.client;
 
-import lemo.mods.banking.Banking;
-import lemo.mods.banking.items.base.PurseContainer;
-import lemo.mods.banking.items.base.PurseInventory;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import lemo.mods.banking.Banking;
+import lemo.mods.banking.items.base.PurseContainer;
+import lemo.mods.banking.items.base.PurseInventory;
+import lemo.mods.banking.items.machine.SellBuyMachineContainer;
+import lemo.mods.banking.items.machine.SellBuyMachineInventory;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiPurse extends GuiContainer {
+public class SellBuyMachineGui extends GuiContainer {
+
+	public SellBuyMachineGui(SellBuyMachineContainer container) {
+		super(container);
+		this.inventory = container.inventory;
+	}
+
 	/**
 	 * x and y size of the inventory window in pixels. Defined as float, passed
 	 * as int These are used for drawing the player model.
@@ -31,15 +39,10 @@ public class GuiPurse extends GuiContainer {
 	 * Download it from Forge_Tutorials/textures/gui/
 	 */
 	private static final ResourceLocation iconLocation = new ResourceLocation(
-			Banking.modid, "textures/gui/inventorypurse.png");
+			Banking.modid, "textures/gui/sellbuymachine.png");
 
 	/** The inventory to render on screen */
-	private final PurseInventory inventory;
-
-	public GuiPurse(PurseContainer purseContainer) {
-		super(purseContainer);
-		this.inventory = purseContainer.inventory;
-	}
+	private final SellBuyMachineInventory inventory;
 
 	/**
 	 * Draws the screen and all the components in it.
@@ -124,4 +127,5 @@ public class GuiPurse extends GuiContainer {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
 	}
+
 }

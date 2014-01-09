@@ -27,7 +27,7 @@ public class PurseInventory implements IInventory {
 
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		ItemStack stack = new ItemStack(Banking.item_coin);
+		ItemStack stack = new ItemStack(CoinItem.item);
 		stack.setItemDamage(slot);
 		stack.setTagCompound(new NBTTagCompound());
 		stack.getTagCompound().setBoolean("virtual", true);
@@ -64,7 +64,7 @@ public class PurseInventory implements IInventory {
 	@Override
 	public ItemStack decrStackSize(int slot, int amount) {
 		int deduct = 0;
-		ItemStack ret = new ItemStack(Banking.item_coin);
+		ItemStack ret = new ItemStack(CoinItem.item);
 
 		switch (slot) {
 		case CoinItem.GOLD:

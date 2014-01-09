@@ -1,6 +1,6 @@
 package lemo.mods.banking;
 
-import lemo.mods.banking.client.GuiPurse;
+import lemo.mods.banking.client.PurseGui;
 import lemo.mods.banking.items.base.PurseContainer;
 import lemo.mods.banking.items.base.PurseInventory;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +33,7 @@ public class CommonProxy implements IGuiHandler {
 		if (ID == Banking.ItemInventoryGuiIndex) {
 			// We have to cast the new container as our custom class
 			// and pass in currently held item for the inventory
-			return new GuiPurse((PurseContainer) new PurseContainer(player,
+			return new PurseGui((PurseContainer) new PurseContainer(player,
 					player.inventory, new PurseInventory(player.getHeldItem())));
 		}
 		return null;
