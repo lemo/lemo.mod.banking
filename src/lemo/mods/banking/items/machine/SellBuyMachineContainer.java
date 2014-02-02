@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class SellBuyMachineContainer extends Container {
 	public SellBuyMachineInventory inventory;
@@ -27,16 +28,6 @@ public class SellBuyMachineContainer extends Container {
 		this.addSlotToContainer(new VoidSlot(this.inventory, i++, 80 + 18 * i,
 				8 * i));
 
-		// If you want, you can add ARMOR SLOTS here as well, but you need to
-		// make a public version of SlotArmor. I won't be doing that in this
-		// tutorial.
-		/*
-		 * for (i = 0; i < 4; ++i) { // These are the standard positions for
-		 * survival inventory layout this.addSlotToContainer(new
-		 * SlotArmor(this.player, inventoryPlayer,
-		 * inventoryPlayer.getSizeInventory() - 1 - i, 8, 8 + i * 18, i)); }
-		 */
-
 		// PLAYER INVENTORY - uses default locations for standard inventory
 		// texture file
 		for (i = 0; i < 3; ++i) {
@@ -56,7 +47,11 @@ public class SellBuyMachineContainer extends Container {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return false;
+		return true;
+	}
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
+		return super.transferStackInSlot(par1EntityPlayer, par2);
 	}
 
 }

@@ -27,7 +27,7 @@ public class CommonProxy implements IGuiHandler {
 					new PurseInventory(player.getHeldItem()));
 		} else if (ID == Banking.SellBuyMachineGuiIndex) {
 			return new SellBuyMachineContainer(player, player.inventory,
-					new SellBuyMachineInventory(player.getHeldItem()));
+					new SellBuyMachineInventory());
 		}
 		return null;
 	}
@@ -42,8 +42,7 @@ public class CommonProxy implements IGuiHandler {
 					new PurseInventory(player.getHeldItem())));
 		} else if (ID == Banking.SellBuyMachineGuiIndex) {
 			return new SellBuyMachineGui(new SellBuyMachineContainer(player,
-					player.inventory, new SellBuyMachineInventory(
-							player.getHeldItem())));
+					player.inventory, new SellBuyMachineInventory()));
 		}
 		return null;
 	}

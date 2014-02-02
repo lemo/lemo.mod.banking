@@ -22,8 +22,6 @@ public class SellBuyMachineInventory implements IInventory {
 	private ItemStack slot_put = null;
 	private ItemStack slot_get = null;
 
-	private final ItemStack stack;
-
 	private class SellBuySlot {
 		private final static int PURSE = 0;
 		private final static int ITEM = 1;
@@ -31,10 +29,7 @@ public class SellBuyMachineInventory implements IInventory {
 		private final static int GET = 3;
 	}
 
-	public SellBuyMachineInventory(ItemStack itemstack) {
-		NBTUtils.checkForNBT(itemstack);
-		stack = itemstack;
-		readFromNBT(stack.getTagCompound());
+	public SellBuyMachineInventory() {
 	}
 
 	@Override
@@ -64,6 +59,7 @@ public class SellBuyMachineInventory implements IInventory {
 			ItemStack t = slot_purse;
 			slot_purse = null;
 			return t;
+
 		case SellBuySlot.GET:
 			int pursebalance = slot_purse.getTagCompound().getInteger("value");
 			int a = amount * ValueDatabase.getValue(slot_item.getItem());
@@ -80,11 +76,6 @@ public class SellBuyMachineInventory implements IInventory {
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slot) {
-		if (slot == SellBuySlot.PURSE) {
-			ItemStack t = slot_purse;
-			slot_purse = null;
-			return t;
-		}
 		return null;
 	}
 
@@ -131,7 +122,7 @@ public class SellBuyMachineInventory implements IInventory {
 
 	@Override
 	public void onInventoryChanged() {
-		writeToNBT(stack.getTagCompound());
+
 	}
 
 	@Override
