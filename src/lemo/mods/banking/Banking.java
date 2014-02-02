@@ -38,7 +38,8 @@ public class Banking {
 	private static int modGuiIndex = 0;
 
 	/** Set our custom inventory Gui index to the next available Gui index */
-	public static final int ItemInventoryGuiIndex = modGuiIndex++;
+	public static final int PurseGuiIndex = modGuiIndex++;
+	public static final int SellBuyMachineGuiIndex = modGuiIndex++;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {

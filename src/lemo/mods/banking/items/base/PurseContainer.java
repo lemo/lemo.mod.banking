@@ -48,9 +48,10 @@ public class PurseContainer extends Container {
 		// this.addSlotToContainer(new PurseSlot(this.inventory, i,
 		// 80 + (18 * (int) (i / 4)), 8 + (18 * (i % 4))));
 		// }
-		this.addSlotToContainer(new Slot(this.inventory, i++, 80, 8));
-		this.addSlotToContainer(new Slot(this.inventory, i++, 80 + 18, 8));
-		this.addSlotToContainer(new Slot(this.inventory, i++, 80 + 18 * 2, 8));
+		this.addSlotToContainer(new VoidSlot(this.inventory, i++, 80, 8));
+		this.addSlotToContainer(new VoidSlot(this.inventory, i++, 80 + 18, 8));
+		this.addSlotToContainer(new VoidSlot(this.inventory, i++, 80 + 18 * 2, 8));
+		this.addSlotToContainer(new Slot(this.inventory, i++, 80 + 18 * 3, 8));
 
 		// If you want, you can add ARMOR SLOTS here as well, but you need to
 		// make a public version of SlotArmor. I won't be doing that in this

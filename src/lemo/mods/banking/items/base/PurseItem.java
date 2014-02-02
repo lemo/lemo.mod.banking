@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import lemo.mods.banking.Banking;
 import lemo.mods.banking.BankingTab;
 import lemo.mods.banking.IDGenerator;
+import lemo.mods.banking.utils.NBTUtils;
 
 public class PurseItem extends Item {
 
@@ -34,7 +35,7 @@ public class PurseItem extends Item {
 	}
 
 	// constants
-	public static int divisor = 100;
+	public static int DIVISOR = 100;
 
 	public PurseItem(int id) {
 		super(id);
@@ -53,9 +54,8 @@ public class PurseItem extends Item {
 	public ItemStack onItemRightClick(ItemStack itemstack, World world,
 			EntityPlayer player) {
 		if (!world.isRemote) {
-			player.openGui(Banking.instance, Banking.ItemInventoryGuiIndex,
-					world, (int) player.posX, (int) player.posY,
-					(int) player.posZ);
+			player.openGui(Banking.instance, Banking.PurseGuiIndex, world,
+					(int) player.posX, (int) player.posY, (int) player.posZ);
 		}
 		return itemstack;
 	}
@@ -72,7 +72,7 @@ public class PurseItem extends Item {
 			EntityPlayer par3EntityPlayer) {
 		super.onCreated(par1ItemStack, par2World, par3EntityPlayer);
 
-		checkForNBT(par1ItemStack);
+		NBTUtils.checkForNBT(par1ItemStack);
 	}
 
 	@Override
@@ -80,12 +80,12 @@ public class PurseItem extends Item {
 			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
 
-		checkForNBT(par1ItemStack);
+		NBTUtils.checkForNBT(par1ItemStack);
 
 		int value = par1ItemStack.stackTagCompound.getInteger("value");
-		int gold = value / (divisor * divisor);
-		int silver = value / divisor % divisor;
-		int bronze = value % divisor;
+		int gold = value / (DIVISOR * DIVISOR);
+		int silver = value / DIVISOR % DIVISOR;
+		int bronze = value % DIVISOR;
 
 		par3List.add(EnumChatFormatting.YELLOW + "Gold:   "
 				+ String.valueOf(gold));
@@ -95,10 +95,4 @@ public class PurseItem extends Item {
 				+ String.valueOf(bronze));
 	}
 
-	private void checkForNBT(ItemStack par1) {
-		if (!par1.hasTagCompound()) {
-			par1.setTagCompound(new NBTTagCompound());
-			par1.getTagCompound().setInteger("value", 0);
-		}
-	}
 }
